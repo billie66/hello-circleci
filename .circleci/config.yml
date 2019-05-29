@@ -1,8 +1,28 @@
 version: 2
+
 jobs:
-  build:
-    docker: # use the docker executor type; machine and macos executors are also supported
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+  deploy:
+    docker:
+      - image: circleci/node:10.15.0
+
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - checkout
+      - run:
+          name: Deploying to GitHub Pages
+          command: |
+            git config --global user.email "billie66@users.noreply.github.com"
+            git config --global user.name "billie66"
+            echo "machine github.com login billie66 password $GITHUB_TOKEN" > ~/.netrc
+            yarn install && GIT_USER=billie66 yarn build
+            cd .. && git clone git@github.com:gatsbyci/gatsbyci.github.io.git gatsbyci
+            cd gatsbyci && rm -rf * && git commit -m -a 'remove readme' && git push
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
