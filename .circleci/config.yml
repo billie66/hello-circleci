@@ -7,6 +7,9 @@ jobs:
 
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "8d:e0:26:c1:f2:cf:c4:19:59:bb:a2:bf:6c:23:ca:29"
       - run:
           name: Deploying to GitHub Pages
           command: |
