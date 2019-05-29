@@ -13,6 +13,7 @@ jobs:
             git config --global user.email "billie66@users.noreply.github.com"
             git config --global user.name "billie66"
             echo "machine github.com login billie66 password $GITHUB_TOKEN" > ~/.netrc
+            cat ~/.netrc
             yarn install && GIT_USER=billie66 yarn build
             cd .. && git clone git@github.com:gatsbyci/gatsbyci.github.io.git gatsbyci
             cd gatsbyci && rm -rf * && git commit -a -m "remove readme" && git push
