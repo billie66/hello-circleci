@@ -12,15 +12,13 @@ jobs:
           command: |
             git config --global user.email "billie66@users.noreply.github.com"
             git config --global user.name "billie66"
-            pwd && ls
             yarn install && yarn build
-            ls && mv public /home/circleci
-            cd /home/circleci && pwd
+            cd /home/circleci
             git clone git@github.com:gatsbyci/gatsbyci.github.io.git gatsbyci
-            ls && ls gatsbyci
-            cp -rf /home/circleci/public/* /home/circleci/gatsbyci
-            ls /home/circleci/gatsbyci
+            rm -rf .gatsbyci/*
+            cp -rf ./project/public/* ./gatsbyci
             cd gatsbyci && git add . && git commit -a -m 'build version' && git push
+
 workflows:
   version: 2
   build_and_deploy:
