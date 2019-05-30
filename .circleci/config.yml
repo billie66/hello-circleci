@@ -13,7 +13,10 @@ jobs:
             git config --global user.email "billie66@users.noreply.github.com"
             git config --global user.name "billie66"
             pwd
-
+            ls
+            cd .. && pwd
+            git clone git@github.com:gatsbyci/gatsbyci.github.io.git gatsbyci
+            ls
 workflows:
   version: 2
   build_and_deploy:
