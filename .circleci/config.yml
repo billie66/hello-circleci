@@ -18,7 +18,7 @@ jobs:
             cd /home/circleci && pwd
             git clone git@github.com:gatsbyci/gatsbyci.github.io.git gatsbyci
             ls && ls gatsbyci
-            cp /home/circleci/public/* /home/circleci/gatsbyci
+            cp -rf /home/circleci/public/* /home/circleci/gatsbyci
             ls /home/circleci/gatsbyci
             cd gatsbyci && git add . && git commit -a -m 'build version' && git push
 workflows:
